@@ -4,15 +4,40 @@ An AI-powered mobile application built with **Flutter** and **TensorFlow Lite** 
 
 ---
 ## 🚀 Features
+### 🤖 AI & Detection
+- **MobileNetV2** TFLite model for 3-class disease classification
+  - 🟠 **Blight** 
+  - 🔴 **Phyllosticta Leaf Spot** 
+  - 🟢 **Healthy Leaf**
+- **GradCAM Heatmap** 
+- **Stage Classification** 
+- **Spot Counter** 
+- **Confidence Score** 
 
-* 📸 Capture leaf image using camera
-* 🖼️ Upload leaf image from gallery
-* 🤖 AI-based disease detection (Healthy / Blight / Phyllosticta)
-* 🌫️ Blur detection for low-quality images
-* 📊 Confidence score with visual indicator
-* 🩺 Severity-based recommendations (Mild / Moderate / Severe)
-* 🗂️ Scan history with filter, select-all, and delete options
-* 🌐 Language toggle (English / Hindi)
+### 📷 Input & Segmentation
+- 📸 Capture leaf image using device camera
+- 🖼️ Upload from gallery
+- ✂️ **SAM Segmentation** (Segment Anything Model) 
+- 🔍 Multi-stage image validation:
+  - Format & quality check
+  - **Blur detection** (Laplacian variance)
+  - **Leaf heuristic** (green pixel ratio)
+
+### 📊 Results & History
+- Detailed result screen with disease name, stage, affected area %, spot count
+- **Scan History** 
+- **GradCAM regeneration** 
+- **PDF Export** 
+
+### 🌍 Multilingual Support
+- 🇬🇧 **English**
+- 🌴 **Malayalam** (മലയാളം)
+- 🌺 **Tamil** (தமிழ்)
+
+### 📋 Recommendations
+- Disease-specific treatment advice with fungicide names and dosages
+- Agri helpline integration (Kisan Call Centre 1800-180-1551)
+- Weather warning card for disease risk conditions
 
 ---
 
