@@ -2,6 +2,25 @@
 
 An AI-powered mobile application built with **Flutter** and **TensorFlow Lite** to detect diseases in **cardamom leaves**. The app uses a **multi-stage validation pipeline** to ensure reliable predictions and to **reject invalid or non-cardamom images**.
 
+
+---
+
+## 📱 Screenshots
+
+| Home Screen | Image Preview | Result Screen |
+|:-----------:|:-------------:|:-------------:|
+| ![Home](assets/screenshots/home_screen.png) | ![Preview](assets/screenshots/image_preview.png) | ![Result](assets/screenshots/result_screen.png) |
+
+| Result with Heatmap | History Screen | PDF Export |
+|:-------------------:|:--------------:|:----------:|
+| ![Heatmap](assets/screenshots/result_screen_with_heatmap.png) | ![History](assets/screenshots/history_screen.png) | ![PDF](assets/screenshots/pdf_export.png) |
+
+| SAM Segmentation | Disease Info |
+|:----------------:|:------------:|
+| ![SAM](assets/screenshots/segmentation_using_SAM.png) | ![Info](assets/screenshots/detailed_description.png) |
+
+---
+
 ---
 ## 🚀 Features
 ### 🤖 AI & Detection
