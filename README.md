@@ -60,90 +60,125 @@ An AI-powered mobile application built with **Flutter** and **TensorFlow Lite** 
 
 ---
 
-## 📱 Screenshots
-
-### 🏠 Home Screen
-![Home Screen](assets/screenshots/home_screen.png)
-
-### 📜 Scan History
-![Scan History](assets/screenshots/scan_history.png)
-
-### 🧪 Disease Detection Result
-![Result Screen](assets/screenshots/result_screen.png)
-
-### ❌ Invalid Image Rejection
-![Invalid Image](assets/screenshots/invalid_image.png)
-
 ---
 
 ## 🛠️ Tech Stack
 
 * **Flutter** (UI)
-* **Dart** (Logic)
+* **UI Framework**
+* **Language** (Dart) 
 * **TensorFlow Lite** (ML inference)
-* **MobileNet-based CNN models**
+* **MobileNetV2**
+* **GradCAM**
 * **Path Provider** (local storage)
 
 ---
 
 ## 📂 Project Structure 
 
-```
 lib/
 ├── core/
-|   ├── localization/
-|   |     ├── app_strings.dart
-│   |     └── app_language.dart
+│   ├── localization/
+│   │   ├── app_language.dart        # Language enum (EN / ML / TA)
+│   │   └── app_strings.dart         # All UI strings in 3 languages
 │   ├── models/
-|   |     ├── sam_prompt.dart
-│   ├     └── scan_result.dart
+│   │   ├── sam_prompt.dart          # SAM segmentation prompt model
+│   │   └── scan_result.dart         # Scan result data model
 │   └── utils/
-|        ├── image_cropper.dart
-│        ├── image_quality.dart
-|        ├── image_resize.dart
-|        ├── leaf_validator.dart
-│        └── image_validatior.dart
-├── Features/
-│     ├── camera
-|     |      ├── camera_screnn.dart
-|     |      ├── full_image_viewer.dart
-|     |      ├── image_preview_screen.dart
-|     |      └── sam_interaction_screen.dart
-│     ├── history
-|     |       └── history.dart
-│     ├── navigation
-|     |      ├── home_screen.dart
-|     |      └── main_navigation.dart
-│     └── result
-|             └── result.dart
+│       ├── image_quality.dart       # Blur detection (Laplacian)
+│       ├── image_resize.dart        # Resize to 224×224
+│       ├── image_validator.dart     # Format & file validation
+│       └── leaf_validator.dart      # Green pixel heuristic
+│
+├── features/
+│   ├── camera/
+│   │   ├── camera_screen.dart       # Home screen with capture/gallery
+│   │   ├── full_image_viewer.dart   # Full-screen image + heatmap viewer
+│   │   ├── image_preview_screen.dart # Preview before analysis
+│   │   └── sam_interaction_screen.dart # SAM segmentation UI
+│   ├── history/
+│   │   └── history_screen.dart      # Scan history + PDF export
+│   ├── navigation/
+│   │   ├── home_screen.dart
+│   │   └── main_navigation.dart     # Bottom nav with animated pill
+│   └── result/
+│       └── result_screen.dart       # Detection result + heatmap
+│
 ├── services/
-│      ├── ml
-|      |     ├── classifier.dart
-|      |     ├── inference_isolate.dart
-|      |     ├── sam_service.dart
-|      |     └── tflite_service.dart
-|      ├── model_service.dart
-|      ├── prediction_cache.dart
-│      └── scan_storage.dart
+│   ├── ml/
+│   │   ├── tflite_service.dart      # MobileNetV2 + GradCAM inference
+│   │   ├── gradcam_helper.dart      # GradCAM CAM generation + jet colormap
+│   │   ├── stage_classifier.dart    # Initial / Advanced stage logic
+│   │   ├── spot_counter.dart        # Phyllosticta spot counting (HSV)
+│   │   ├── sam_service.dart         # SAM segmentation service
+│   │   └── inference_isolate.dart   # Background inference isolate
+│   ├── model_service.dart           # Full pipeline orchestrator
+│   ├── prediction_cache.dart        # Cache for repeated predictions
+│   └── scan_storage.dart            # SharedPreferences scan history
+│
 ├── widgets/
-|   ├── agri_helpine_button.dart
-|   ├── confidence_bar.dart
-|   ├── guideline_tflite.dart
-|   ├── language_option_tile.dart
-│   ├── loading_overlay.dart
-│   └── weather_warning_card.dart
+│   ├── agri_helpline_button.dart    # Kisan Call Centre button
+│   ├── confidence_bar.dart          # Animated confidence progress bar
+│   ├── guideline_tile.dart          # Expandable guideline tile
+│   ├── language_option_tile.dart    # Language selector tile
+│   ├── loading_overlay.dart         # Full-screen loading overlay
+│   └── weather_warning_card.dart    # Weather disease risk card
+│
 └── main.dart
-```
 
 ---
 
+## ⚙️ Pipeline Architecture
+
+```
+  Image Capture / Gallery
+             ↓
+SAM Segmentation (Auto / Manual)
+             ↓
+┌──ModelService.runPipeline()──┐
+│  1. ImageValidator           │
+│  2. ImageQuality             │
+│  3. LeafValidator            │
+│  4. ImageResize              │
+│  5. TFLiteService            │
+│                              │
+│  6. Confidence check         │
+│  7. TFLiteService            │
+│  8. StageClassifier          │
+│  9. SpotCounter              │
+└──────────────────────────────┘
+             ↓
+         ScanResult
+             ↓
+ResultScreen (disease + stage + confidence + heatmap)
+             ↓
+   ScanStorage → HistoryScreen
+```
 ## ⚙️ How to Run
+### Prerequisites
+- Flutter SDK 3.x
+- Android SDK (API 21+)
+- Android device or emulator
+  
+### Steps
 
-1. Clone the repository
-2. Run `flutter pub get`
-3. Connect an Android device or emulator
-4. Run `flutter run`
+```bash
+# 1. Clone the repository
+git clone https://github.com/yourusername/cardamom_leaves_disease_detector.git
 
+# 2. Navigate to project
+cd cardamom_leaves_disease_detector
+
+# 3. Install dependencies
+flutter pub get
+
+# 4. Connect Android device or start emulator
+
+# 5. Run the app
+flutter run
+
+# 6. Build release APK
+flutter build apk --release
 
 ## 📄 License
 
