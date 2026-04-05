@@ -74,8 +74,9 @@ An AI-powered mobile application built with **Flutter** and **TensorFlow Lite** 
 
 ---
 
-## 📂 Project Structure 
+## 📂 Project Structure
 
+```
 lib/
 ├── core/
 │   ├── localization/
@@ -125,7 +126,7 @@ lib/
 │   └── weather_warning_card.dart    # Weather disease risk card
 │
 └── main.dart
-
+```
 ---
 
 ## ⚙️ Pipeline Architecture
