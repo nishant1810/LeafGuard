@@ -1,6 +1,5 @@
 # 🌿 Cardamom Leaf Disease Detection App
 
-An AI-powered mobile application built with **Flutter** and **TensorFlow Lite** to detect diseases in **cardamom leaves**. The app uses a **multi-stage validation pipeline** to ensure reliable predictions and to **reject invalid or non-cardamom images**.
 An AI-powered mobile application built with <strong>Flutter</strong> and <strong>TensorFlow Lite</strong>to detect diseases in cardamom leaves with explainable AI (GradCAM heatmaps),multilingual support, and a robust multi-stage validation pipeline.
 
 
